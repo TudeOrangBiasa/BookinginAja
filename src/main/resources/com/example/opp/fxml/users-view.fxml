@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.opp.controller.UsersController"
+      spacing="24" styleClass="page-content">
+    <padding><Insets top="24" right="24" bottom="24" left="24"/></padding>
+
+    <!-- Page Header -->
+    <HBox alignment="CENTER_LEFT" spacing="16">
+        <VBox>
+            <Label text="Kelola Pengguna" styleClass="page-title"/>
+            <Label text="Kelola akun admin dan staff hotel" styleClass="page-subtitle"/>
+        </VBox>
+        <Region HBox.hgrow="ALWAYS"/>
+        <HBox spacing="12">
+            <TextField fx:id="searchField" promptText="Cari pengguna..." styleClass="search-field" prefWidth="200"/>
+            <Button text="+ Tambah User" onAction="#handleAddUser" styleClass="btn-primary"/>
+        </HBox>
+    </HBox>
+
+    <!-- Users Table -->
+    <VBox styleClass="card" VBox.vgrow="ALWAYS" spacing="0">
+        <TableView fx:id="usersTable" VBox.vgrow="ALWAYS" styleClass="data-table">
+            <columns>
+                <TableColumn fx:id="usernameCol" text="Username" minWidth="100" prefWidth="130"/>
+                <TableColumn fx:id="fullNameCol" text="Nama Lengkap" minWidth="150" prefWidth="200"/>
+                <TableColumn fx:id="emailCol" text="Email" minWidth="180" prefWidth="220"/>
+                <TableColumn fx:id="roleCol" text="Role" minWidth="100" prefWidth="130"/>
+                <TableColumn fx:id="statusCol" text="Status" minWidth="90" prefWidth="110"/>
+                <TableColumn fx:id="actionCol" text="Aksi" minWidth="140" prefWidth="170"/>
+            </columns>
+            <placeholder>
+                <Label text="Tidak ada data pengguna" styleClass="empty-state"/>
+            </placeholder>
+        </TableView>
+    </VBox>
+</VBox>

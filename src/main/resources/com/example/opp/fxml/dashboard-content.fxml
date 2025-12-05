@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.opp.controller.DashboardContentController"
+      spacing="24" styleClass="page-content">
+    <padding><Insets top="24" right="24" bottom="24" left="24"/></padding>
+
+    <!-- Page Header -->
+    <HBox alignment="CENTER_LEFT" spacing="16">
+        <VBox>
+            <Label text="Dashboard" styleClass="page-title"/>
+            <Label fx:id="dateLabel" text="Jumat, 5 Desember 2025" styleClass="page-subtitle"/>
+        </VBox>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="+ Booking Baru" onAction="#handleNewBooking" styleClass="btn-primary"/>
+    </HBox>
+
+    <!-- Stats Cards -->
+    <HBox spacing="16">
+        <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+            <HBox alignment="CENTER_LEFT" spacing="12">
+                <StackPane styleClass="stat-icon-box, stat-icon-green">
+                    <Label text="✓" styleClass="stat-icon"/>
+                </StackPane>
+                <VBox>
+                    <Label fx:id="availableCount" text="0" styleClass="stat-value"/>
+                    <Label text="Tersedia" styleClass="stat-label"/>
+                </VBox>
+            </HBox>
+        </VBox>
+
+        <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+            <HBox alignment="CENTER_LEFT" spacing="12">
+                <StackPane styleClass="stat-icon-box, stat-icon-red">
+                    <Label text="●" styleClass="stat-icon"/>
+                </StackPane>
+                <VBox>
+                    <Label fx:id="occupiedCount" text="0" styleClass="stat-value"/>
+                    <Label text="Terisi" styleClass="stat-label"/>
+                </VBox>
+            </HBox>
+        </VBox>
+
+        <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+            <HBox alignment="CENTER_LEFT" spacing="12">
+                <StackPane styleClass="stat-icon-box, stat-icon-orange">
+                    <Label text="◐" styleClass="stat-icon"/>
+                </StackPane>
+                <VBox>
+                    <Label fx:id="reservedCount" text="0" styleClass="stat-value"/>
+                    <Label text="Dipesan" styleClass="stat-label"/>
+                </VBox>
+            </HBox>
+        </VBox>
+
+        <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+            <HBox alignment="CENTER_LEFT" spacing="12">
+                <StackPane styleClass="stat-icon-box, stat-icon-gray">
+                    <Label text="⚙" styleClass="stat-icon"/>
+                </StackPane>
+                <VBox>
+                    <Label fx:id="maintenanceCount" text="0" styleClass="stat-value"/>
+                    <Label text="Perbaikan" styleClass="stat-label"/>
+                </VBox>
+            </HBox>
+        </VBox>
+    </HBox>
+
+    <!-- Today's Activity -->
+    <HBox spacing="16" VBox.vgrow="ALWAYS">
+        <!-- Check-ins Today -->
+        <VBox styleClass="card" spacing="16" HBox.hgrow="ALWAYS">
+            <HBox alignment="CENTER_LEFT">
+                <Label text="Check-in Hari Ini" styleClass="card-header"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="checkInCountLabel" text="0" styleClass="badge-blue"/>
+            </HBox>
+            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="card-scroll">
+                <VBox fx:id="checkInList" spacing="8"/>
+            </ScrollPane>
+        </VBox>
+
+        <!-- Check-outs Today -->
+        <VBox styleClass="card" spacing="16" HBox.hgrow="ALWAYS">
+            <HBox alignment="CENTER_LEFT">
+                <Label text="Check-out Hari Ini" styleClass="card-header"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="checkOutCountLabel" text="0" styleClass="badge-orange"/>
+            </HBox>
+            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="card-scroll">
+                <VBox fx:id="checkOutList" spacing="8"/>
+            </ScrollPane>
+        </VBox>
+    </HBox>
+</VBox>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.opp.controller.ReportsController"
+      spacing="24" styleClass="page-content">
+    <padding><Insets top="24" right="24" bottom="24" left="24"/></padding>
+
+    <!-- Page Header -->
+    <HBox alignment="CENTER_LEFT" spacing="16">
+        <VBox>
+            <Label text="Laporan" styleClass="page-title"/>
+            <Label text="Lihat statistik dan laporan hotel" styleClass="page-subtitle"/>
+        </VBox>
+        <Region HBox.hgrow="ALWAYS"/>
+        <HBox spacing="12">
+            <DatePicker fx:id="fromDate" promptText="Dari Tanggal"/>
+            <DatePicker fx:id="toDate" promptText="Sampai Tanggal"/>
+            <Button text="Tampilkan" onAction="#handleGenerate" styleClass="btn-primary"/>
+            <Button text="📄 Export" onAction="#handleExportPdf" styleClass="btn-secondary"/>
+        </HBox>
+    </HBox>
+
+    <!-- Summary Cards -->
+    <HBox spacing="16">
+        <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+            <Label text="Total Booking" styleClass="stat-label"/>
+            <Label fx:id="totalBookings" text="0" styleClass="stat-value"/>
+        </VBox>
+        <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+            <Label text="Total Pendapatan" styleClass="stat-label"/>
+            <Label fx:id="totalRevenue" text="Rp 0" styleClass="stat-value-blue"/>
+        </VBox>
+        <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+            <Label text="Rata-rata Menginap" styleClass="stat-label"/>
+            <Label fx:id="avgStay" text="0 malam" styleClass="stat-value"/>
+        </VBox>
+        <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+            <Label text="Tingkat Hunian" styleClass="stat-label"/>
+            <Label fx:id="occupancyRate" text="0%" styleClass="stat-value-green"/>
+        </VBox>
+    </HBox>
+
+    <!-- Report Content -->
+    <VBox styleClass="card" VBox.vgrow="ALWAYS">
+        <Label text="Ringkasan Booking" styleClass="card-header"/>
+        <TableView fx:id="reportTable" VBox.vgrow="ALWAYS" styleClass="data-table">
+            <columns>
+                <TableColumn fx:id="dateCol" text="Tanggal" minWidth="120" prefWidth="150"/>
+                <TableColumn fx:id="bookingsCol" text="Booking" minWidth="80" prefWidth="100"/>
+                <TableColumn fx:id="checkInsCol" text="Check-in" minWidth="80" prefWidth="100"/>
+                <TableColumn fx:id="checkOutsCol" text="Check-out" minWidth="80" prefWidth="100"/>
+                <TableColumn fx:id="revenueCol" text="Pendapatan" minWidth="130" prefWidth="180"/>
+            </columns>
+            <placeholder>
+                <Label text="Pilih rentang tanggal dan klik Tampilkan" styleClass="empty-state"/>
+            </placeholder>
+        </TableView>
+    </VBox>
+</VBox>

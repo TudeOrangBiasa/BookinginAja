@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.opp.controller.LoginController"
+      styleClass="login-container" stylesheets="@../css/style.css">
+
+    <!-- Left Panel - Branding -->
+    <VBox styleClass="login-left-panel" alignment="CENTER" HBox.hgrow="ALWAYS">
+        <padding><Insets top="40" right="40" bottom="40" left="40"/></padding>
+
+        <Region VBox.vgrow="ALWAYS"/>
+
+        <Label text="🏨" style="-fx-font-size: 64px;"/>
+        <Region prefHeight="16"/>
+        <Label text="Sistem" styleClass="brand-title"/>
+        <Label text="MANAJEMEN HOTEL" styleClass="brand-subtitle"/>
+
+        <Region prefHeight="30"/>
+
+        <Label text="Kelola operasional hotel Anda dengan sistem manajemen yang komprehensif" styleClass="brand-tagline" wrapText="true" textAlignment="CENTER" maxWidth="280"/>
+
+        <Region VBox.vgrow="ALWAYS"/>
+
+        <Label text="© 2025 Hotel Management System" styleClass="copyright"/>
+    </VBox>
+
+    <!-- Right Panel - Login Form -->
+    <VBox fx:id="loginForm" styleClass="login-right-panel" alignment="CENTER" HBox.hgrow="ALWAYS">
+        <padding><Insets top="60" right="60" bottom="60" left="60"/></padding>
+
+        <Region VBox.vgrow="ALWAYS"/>
+
+        <Label text="Selamat Datang" styleClass="login-title"/>
+        <Label text="Masuk untuk mengakses dashboard Anda" styleClass="login-subtitle"/>
+
+        <Region prefHeight="40"/>
+
+        <!-- Error Message -->
+        <Label fx:id="errorLabel" styleClass="error-label" visible="false" managed="false"/>
+
+        <Region prefHeight="10"/>
+
+        <!-- Username -->
+        <VBox styleClass="input-group" spacing="8">
+            <Label text="Username" styleClass="input-label"/>
+            <TextField fx:id="usernameField" promptText="Masukkan username Anda" styleClass="login-input"/>
+        </VBox>
+
+        <Region prefHeight="20"/>
+
+        <!-- Password -->
+        <VBox styleClass="input-group" spacing="8">
+            <Label text="Password" styleClass="input-label"/>
+            <PasswordField fx:id="passwordField" promptText="Masukkan password Anda" styleClass="login-input"/>
+        </VBox>
+
+        <Region prefHeight="15"/>
+
+        <!-- Remember Me & Forgot Password -->
+        <HBox alignment="CENTER_LEFT" styleClass="input-group">
+            <CheckBox fx:id="rememberMeCheckbox" text="Ingat saya" styleClass="remember-checkbox"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Hyperlink text="Lupa password?" onAction="#handleForgotPassword" styleClass="forgot-link"/>
+        </HBox>
+
+        <Region prefHeight="30"/>
+
+        <!-- Login Button -->
+        <StackPane styleClass="input-group">
+            <Button fx:id="loginButton" text="Masuk" onAction="#handleLogin" styleClass="login-button" maxWidth="Infinity"/>
+            <ProgressIndicator fx:id="loadingIndicator" visible="false" maxWidth="24" maxHeight="24"/>
+        </StackPane>
+
+        <Region VBox.vgrow="ALWAYS"/>
+
+        <Label text="Butuh bantuan? Hubungi administrator" styleClass="support-text"/>
+    </VBox>
+</HBox>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.opp.controller.RoomsController"
+      spacing="24" styleClass="page-content">
+    <padding><Insets top="24" right="24" bottom="24" left="24"/></padding>
+
+    <!-- Page Header -->
+    <HBox alignment="CENTER_LEFT" spacing="16">
+        <VBox>
+            <Label text="Manajemen Kamar" styleClass="page-title"/>
+            <Label text="Lihat dan kelola semua kamar hotel" styleClass="page-subtitle"/>
+        </VBox>
+        <Region HBox.hgrow="ALWAYS"/>
+        <HBox spacing="12">
+            <ComboBox fx:id="filterCombo" promptText="Semua Status" styleClass="filter-combo"/>
+            <ComboBox fx:id="floorCombo" promptText="Semua Lantai" styleClass="filter-combo"/>
+            <Button fx:id="addRoomBtn" text="+ Tambah Kamar" onAction="#handleAddRoom" styleClass="btn-primary"/>
+        </HBox>
+    </HBox>
+
+    <!-- Room Status Legend -->
+    <HBox spacing="24" styleClass="legend-bar">
+        <HBox spacing="6" alignment="CENTER_LEFT">
+            <Region styleClass="legend-dot, legend-available"/>
+            <Label text="Tersedia" styleClass="legend-text"/>
+        </HBox>
+        <HBox spacing="6" alignment="CENTER_LEFT">
+            <Region styleClass="legend-dot, legend-occupied"/>
+            <Label text="Terisi" styleClass="legend-text"/>
+        </HBox>
+        <HBox spacing="6" alignment="CENTER_LEFT">
+            <Region styleClass="legend-dot, legend-reserved"/>
+            <Label text="Dipesan" styleClass="legend-text"/>
+        </HBox>
+        <HBox spacing="6" alignment="CENTER_LEFT">
+            <Region styleClass="legend-dot, legend-maintenance"/>
+            <Label text="Perbaikan" styleClass="legend-text"/>
+        </HBox>
+    </HBox>
+
+    <!-- Room Grid -->
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="room-scroll">
+        <FlowPane fx:id="roomGrid" hgap="16" vgap="16" styleClass="room-grid"/>
+    </ScrollPane>
+</VBox>

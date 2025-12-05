@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.opp.controller.GuestsController"
+      spacing="24" styleClass="page-content">
+    <padding><Insets top="24" right="24" bottom="24" left="24"/></padding>
+
+    <!-- Page Header -->
+    <HBox alignment="CENTER_LEFT" spacing="16">
+        <VBox>
+            <Label text="Manajemen Tamu" styleClass="page-title"/>
+            <Label text="Lihat dan kelola data tamu hotel" styleClass="page-subtitle"/>
+        </VBox>
+        <Region HBox.hgrow="ALWAYS"/>
+        <HBox spacing="12">
+            <TextField fx:id="searchField" promptText="Cari nama atau nomor identitas..." styleClass="search-input" prefWidth="280"/>
+            <Button text="+ Tambah Tamu" onAction="#handleAddGuest" styleClass="btn-primary"/>
+        </HBox>
+    </HBox>
+
+    <!-- Guests Table -->
+    <VBox styleClass="card" VBox.vgrow="ALWAYS" spacing="0">
+        <TableView fx:id="guestsTable" VBox.vgrow="ALWAYS" styleClass="data-table">
+            <columns>
+                <TableColumn fx:id="idNumberCol" text="Nomor Identitas" minWidth="150" prefWidth="170"/>
+                <TableColumn fx:id="idTypeCol" text="Jenis" minWidth="70" prefWidth="80"/>
+                <TableColumn fx:id="nameCol" text="Nama Lengkap" minWidth="150" prefWidth="200"/>
+                <TableColumn fx:id="phoneCol" text="Telepon" minWidth="120" prefWidth="140"/>
+                <TableColumn fx:id="emailCol" text="Email" minWidth="150" prefWidth="200"/>
+                <TableColumn fx:id="actionCol" text="Aksi" minWidth="120" prefWidth="140"/>
+            </columns>
+            <placeholder>
+                <Label text="Tidak ada tamu ditemukan" styleClass="empty-state"/>
+            </placeholder>
+        </TableView>
+    </VBox>
+</VBox>

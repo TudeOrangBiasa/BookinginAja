@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.opp.controller.DashboardController"
+            styleClass="dashboard-container" stylesheets="@../css/style.css">
+
+    <!-- Top Navigation -->
+    <top>
+        <HBox styleClass="navbar" alignment="CENTER_LEFT" spacing="20">
+            <padding><Insets top="15" right="30" bottom="15" left="30"/></padding>
+
+            <Label text="Enterprise Portal" styleClass="navbar-brand"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Logout" onAction="#handleLogout" styleClass="logout-button"/>
+        </HBox>
+    </top>
+
+    <!-- Main Content -->
+    <center>
+        <VBox alignment="CENTER" spacing="20">
+            <padding><Insets top="40" right="40" bottom="40" left="40"/></padding>
+
+            <Label fx:id="welcomeLabel" styleClass="dashboard-title"/>
+            <Label text="You have successfully logged in to the system." styleClass="dashboard-subtitle"/>
+
+            <Region prefHeight="30"/>
+
+            <HBox spacing="20" alignment="CENTER">
+                <VBox styleClass="dashboard-card" alignment="CENTER" spacing="10">
+                    <Label text="📊" style="-fx-font-size: 32px;"/>
+                    <Label text="Reports" styleClass="card-title"/>
+                    <Label text="View analytics" styleClass="card-desc"/>
+                </VBox>
+                <VBox styleClass="dashboard-card" alignment="CENTER" spacing="10">
+                    <Label text="👥" style="-fx-font-size: 32px;"/>
+                    <Label text="Users" styleClass="card-title"/>
+                    <Label text="Manage accounts" styleClass="card-desc"/>
+                </VBox>
+                <VBox styleClass="dashboard-card" alignment="CENTER" spacing="10">
+                    <Label text="⚙️" style="-fx-font-size: 32px;"/>
+                    <Label text="Settings" styleClass="card-title"/>
+                    <Label text="Configuration" styleClass="card-desc"/>
+                </VBox>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

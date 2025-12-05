@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.opp.controller.BookingsController"
+      spacing="24" styleClass="page-content">
+    <padding><Insets top="24" right="24" bottom="24" left="24"/></padding>
+
+    <!-- Page Header -->
+    <HBox alignment="CENTER_LEFT" spacing="16">
+        <VBox>
+            <Label text="Manajemen Booking" styleClass="page-title"/>
+            <Label text="Kelola reservasi dan check-in/check-out" styleClass="page-subtitle"/>
+        </VBox>
+        <Region HBox.hgrow="ALWAYS"/>
+        <HBox spacing="12">
+            <TextField fx:id="searchField" promptText="Cari kode booking atau nama tamu..." styleClass="search-input" prefWidth="280"/>
+            <ComboBox fx:id="statusFilter" promptText="Semua Status" styleClass="filter-combo"/>
+            <Button text="+ Booking Baru" onAction="#handleNewBooking" styleClass="btn-primary"/>
+        </HBox>
+    </HBox>
+
+    <!-- Bookings Table -->
+    <VBox styleClass="card" VBox.vgrow="ALWAYS" spacing="0">
+        <TableView fx:id="bookingsTable" VBox.vgrow="ALWAYS" styleClass="data-table">
+            <columns>
+                <TableColumn fx:id="codeCol" text="Kode Booking" minWidth="120" prefWidth="140"/>
+                <TableColumn fx:id="guestCol" text="Nama Tamu" minWidth="140" prefWidth="180"/>
+                <TableColumn fx:id="roomCol" text="Kamar" minWidth="70" prefWidth="80"/>
+                <TableColumn fx:id="checkInCol" text="Check In" minWidth="100" prefWidth="110"/>
+                <TableColumn fx:id="checkOutCol" text="Check Out" minWidth="100" prefWidth="110"/>
+                <TableColumn fx:id="nightsCol" text="Malam" minWidth="60" prefWidth="70"/>
+                <TableColumn fx:id="totalCol" text="Total" minWidth="110" prefWidth="130"/>
+                <TableColumn fx:id="statusCol" text="Status" minWidth="100" prefWidth="110"/>
+                <TableColumn fx:id="actionCol" text="Aksi" minWidth="140" prefWidth="160"/>
+            </columns>
+            <placeholder>
+                <Label text="Tidak ada booking ditemukan" styleClass="empty-state"/>
+            </placeholder>
+        </TableView>
+    </VBox>
+</VBox>
