@@ -56,6 +56,7 @@ public class BookingRepository extends BaseRepository<Booking, Long> {
         return queryOne("SELECT * FROM bookings WHERE booking_code = ?", code);
     }
 
+
     public List<Booking> findByStatus(BookingStatus status) throws SQLException {
         return query("SELECT * FROM bookings WHERE status = ? ORDER BY check_in_date", status.name());
     }
