@@ -20,6 +20,7 @@ public class RoomTypeRepository extends BaseRepository<RoomType, Long> {
         type.setDescription(rs.getString("description"));
         type.setBasePrice(rs.getBigDecimal("base_price"));
         type.setCapacity(rs.getInt("capacity"));
+        type.setImageUrl(rs.getString("image_url"));
 
         Timestamp createdAt = rs.getTimestamp("created_at");
         if (createdAt != null) type.setCreatedAt(createdAt.toLocalDateTime());

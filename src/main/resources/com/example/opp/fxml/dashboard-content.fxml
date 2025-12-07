@@ -18,54 +18,34 @@
         <Button text="+ Booking Baru" onAction="#handleNewBooking" styleClass="btn-primary"/>
     </HBox>
 
-    <!-- Stats Cards -->
+    <!-- Bento Grid Stats Cards -->
     <HBox spacing="16">
-        <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
-            <HBox alignment="CENTER_LEFT" spacing="12">
-                <StackPane styleClass="stat-icon-box, stat-icon-green">
-                    <Label text="✓" styleClass="stat-icon"/>
-                </StackPane>
-                <VBox>
-                    <Label fx:id="availableCount" text="0" styleClass="stat-value"/>
-                    <Label text="Tersedia" styleClass="stat-label"/>
-                </VBox>
-            </HBox>
+        <VBox styleClass="stat-card, stat-card-green" HBox.hgrow="ALWAYS">
+            <VBox spacing="8">
+                <Label fx:id="availableCount" text="0" styleClass="stat-value" style="-fx-text-fill: #00B894;"/>
+                <Label text="Kamar Tersedia" styleClass="stat-label"/>
+            </VBox>
         </VBox>
 
-        <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
-            <HBox alignment="CENTER_LEFT" spacing="12">
-                <StackPane styleClass="stat-icon-box, stat-icon-red">
-                    <Label text="●" styleClass="stat-icon"/>
-                </StackPane>
-                <VBox>
-                    <Label fx:id="occupiedCount" text="0" styleClass="stat-value"/>
-                    <Label text="Terisi" styleClass="stat-label"/>
-                </VBox>
-            </HBox>
+        <VBox styleClass="stat-card, stat-card-red" HBox.hgrow="ALWAYS">
+            <VBox spacing="8">
+                <Label fx:id="occupiedCount" text="0" styleClass="stat-value" style="-fx-text-fill: #E17055;"/>
+                <Label text="Kamar Terisi" styleClass="stat-label"/>
+            </VBox>
         </VBox>
 
-        <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
-            <HBox alignment="CENTER_LEFT" spacing="12">
-                <StackPane styleClass="stat-icon-box, stat-icon-orange">
-                    <Label text="◐" styleClass="stat-icon"/>
-                </StackPane>
-                <VBox>
-                    <Label fx:id="reservedCount" text="0" styleClass="stat-value"/>
-                    <Label text="Dipesan" styleClass="stat-label"/>
-                </VBox>
-            </HBox>
+        <VBox styleClass="stat-card, stat-card-orange" HBox.hgrow="ALWAYS">
+            <VBox spacing="8">
+                <Label fx:id="reservedCount" text="0" styleClass="stat-value" style="-fx-text-fill: #FDCB6E;"/>
+                <Label text="Kamar Dipesan" styleClass="stat-label"/>
+            </VBox>
         </VBox>
 
-        <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
-            <HBox alignment="CENTER_LEFT" spacing="12">
-                <StackPane styleClass="stat-icon-box, stat-icon-gray">
-                    <Label text="⚙" styleClass="stat-icon"/>
-                </StackPane>
-                <VBox>
-                    <Label fx:id="maintenanceCount" text="0" styleClass="stat-value"/>
-                    <Label text="Perbaikan" styleClass="stat-label"/>
-                </VBox>
-            </HBox>
+        <VBox styleClass="stat-card, stat-card-gray" HBox.hgrow="ALWAYS">
+            <VBox spacing="8">
+                <Label fx:id="maintenanceCount" text="0" styleClass="stat-value" style="-fx-text-fill: #636E72;"/>
+                <Label text="Dalam Perbaikan" styleClass="stat-label"/>
+            </VBox>
         </VBox>
     </HBox>
 

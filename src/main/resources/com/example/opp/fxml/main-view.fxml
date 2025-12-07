@@ -11,9 +11,9 @@
     <left>
         <VBox styleClass="sidebar">
             <!-- Logo Header -->
-            <VBox styleClass="sidebar-header" spacing="4">
-                <Label text="🏨 Hotel MS" styleClass="sidebar-logo"/>
-                <Label fx:id="userRoleLabel" text="Administrator" styleClass="sidebar-user"/>
+            <VBox styleClass="sidebar-header" spacing="2">
+                <Label text="HOTEL MS" styleClass="app-title"/>
+                <Label fx:id="userRoleLabel" text="Administrator" styleClass="app-subtitle"/>
             </VBox>
 
             <!-- Navigation -->
@@ -21,35 +21,31 @@
                 <padding><Insets top="16" right="0" bottom="16" left="0"/></padding>
 
                 <HBox fx:id="navDashboard" styleClass="nav-item, nav-item-active" onMouseClicked="#showDashboard">
-                    <Label text="📊" styleClass="nav-icon"/>
                     <Label text="Dashboard" styleClass="nav-text"/>
                 </HBox>
 
                 <HBox fx:id="navRooms" styleClass="nav-item" onMouseClicked="#showRooms">
-                    <Label text="🚪" styleClass="nav-icon"/>
                     <Label text="Kamar" styleClass="nav-text"/>
                 </HBox>
 
                 <HBox fx:id="navBookings" styleClass="nav-item" onMouseClicked="#showBookings">
-                    <Label text="📅" styleClass="nav-icon"/>
                     <Label text="Booking" styleClass="nav-text"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label fx:id="bookingNotification" text="0" styleClass="notification-badge" visible="false"/>
                 </HBox>
 
                 <HBox fx:id="navGuests" styleClass="nav-item" onMouseClicked="#showGuests">
-                    <Label text="👥" styleClass="nav-icon"/>
                     <Label text="Tamu" styleClass="nav-text"/>
                 </HBox>
 
                 <!-- Admin Only Menu -->
-                <Label fx:id="adminSeparator" text="── ADMIN ──" styleClass="nav-separator" visible="false" managed="false"/>
+                <Label fx:id="adminSeparator" text="ADMIN" styleClass="nav-separator" visible="false" managed="false"/>
                 
                 <HBox fx:id="navReports" styleClass="nav-item" onMouseClicked="#showReports" visible="false" managed="false">
-                    <Label text="📈" styleClass="nav-icon"/>
                     <Label text="Laporan" styleClass="nav-text"/>
                 </HBox>
 
                 <HBox fx:id="navUsers" styleClass="nav-item" onMouseClicked="#showUsers" visible="false" managed="false">
-                    <Label text="⚙️" styleClass="nav-icon"/>
                     <Label text="Kelola User" styleClass="nav-text"/>
                 </HBox>
             </VBox>
@@ -58,15 +54,10 @@
 
             <!-- User Info & Logout -->
             <VBox styleClass="sidebar-footer" spacing="8">
-                <padding><Insets top="16" right="16" bottom="16" left="16"/></padding>
-                <Separator/>
-                <HBox alignment="CENTER_LEFT" spacing="10">
-                    <Label text="👤" style="-fx-font-size: 20px;"/>
-                    <VBox>
-                        <Label fx:id="userNameLabel" text="Admin User" styleClass="user-name"/>
-                        <Label fx:id="userEmailLabel" text="admin@hotel.com" styleClass="user-email"/>
-                    </VBox>
-                </HBox>
+                <VBox spacing="2">
+                    <Label fx:id="userNameLabel" text="Admin User" styleClass="user-name"/>
+                    <Label fx:id="userEmailLabel" text="admin@hotel.com" styleClass="user-email"/>
+                </VBox>
                 <Button text="Keluar" onAction="#handleLogout" styleClass="btn-logout" maxWidth="Infinity"/>
             </VBox>
         </VBox>

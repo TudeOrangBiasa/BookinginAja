@@ -1,17 +1,18 @@
 # ============================================
 # Hotel Management System - Configuration
 # ============================================
+# Copy this file to config.properties and fill in your values
 
 # Supabase PostgreSQL Configuration
 # Get these from: Supabase Dashboard > Settings > Database
-db.host=aws-1-ap-southeast-1.pooler.supabase.com
-db.port=6543
+db.host=db.YOUR_PROJECT_REF.supabase.co
+db.port=5432
 db.name=postgres
-db.username=postgres.snbcakrfmmdajtwrldle
-db.password=Jd8Ka3RFmssqkPrO
+db.username=postgres
+db.password=YOUR_SUPABASE_PASSWORD
 
 # Connection Pool Settings
-db.pool.size=1
+db.pool.size=5
 db.pool.timeout=30000
 
 # Application Settings

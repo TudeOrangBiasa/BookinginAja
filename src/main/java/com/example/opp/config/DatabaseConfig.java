@@ -12,9 +12,9 @@ public record DatabaseConfig(
     public static DatabaseConfig fromProperties() {
         return new DatabaseConfig(
             AppConfig.get("db.host", "localhost"),
-            AppConfig.getInt("db.port", 3306),
-            AppConfig.get("db.name", ""),
-            AppConfig.get("db.username", "root"),
+            AppConfig.getInt("db.port", 5432),
+            AppConfig.get("db.name", "postgres"),
+            AppConfig.get("db.username", "postgres"),
             AppConfig.get("db.password", ""),
             AppConfig.getInt("db.pool.size", 10),
             AppConfig.getInt("db.pool.timeout", 30000)
@@ -22,7 +22,10 @@ public record DatabaseConfig(
     }
 
     public String getJdbcUrl() {
-        return String.format("jdbc:mysql://%s:%d/%s?useSSL=false&serverTimezone=UTC", 
-            host, port, database);
+        // Supabase PostgreSQL connection string
+        return String.format(
+            "jdbc:postgresql://%s:%d/%s?sslmode=require&prepareThreshold=0",
+            host, port, database
+        );
     }
 }

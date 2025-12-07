@@ -85,6 +85,25 @@ public class BookingService {
         return true;
     }
 
+    public boolean confirmBooking(Long bookingId) throws SQLException {
+        Optional<Booking> bookingOpt = bookingRepository.findById(bookingId);
+        if (bookingOpt.isEmpty()) return false;
+
+        Booking booking = bookingOpt.get();
+        if (booking.getStatus() != BookingStatus.PENDING) {
+            return false;
+        }
+
+        bookingRepository.updateStatus(bookingId, BookingStatus.CONFIRMED);
+        
+        // Update room status to RESERVED if check-in is today
+        if (booking.getCheckInDate().equals(LocalDate.now())) {
+            roomRepository.updateStatus(booking.getRoomId(), RoomStatus.RESERVED);
+        }
+
+        return true;
+    }
+
     public boolean cancelBooking(Long bookingId) throws SQLException {
         Optional<Booking> bookingOpt = bookingRepository.findById(bookingId);
         if (bookingOpt.isEmpty()) return false;

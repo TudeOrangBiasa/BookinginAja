@@ -22,6 +22,7 @@ import java.util.List;
 public class BookingsController {
 
     @FXML private TableView<Booking> bookingsTable;
+    @FXML private TableColumn<Booking, String> numberCol;
     @FXML private TableColumn<Booking, String> codeCol;
     @FXML private TableColumn<Booking, String> guestCol;
     @FXML private TableColumn<Booking, String> roomCol;
@@ -56,6 +57,9 @@ public class BookingsController {
     }
 
     private void setupTable() {
+        numberCol.setCellValueFactory(c -> new SimpleStringProperty(
+            String.valueOf(bookingsTable.getItems().indexOf(c.getValue()) + 1)
+        ));
         codeCol.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getBookingCode()));
         guestCol.setCellValueFactory(c -> {
             var guest = c.getValue().getGuest();
@@ -103,7 +107,19 @@ public class BookingsController {
         box.setAlignment(Pos.CENTER);
         BookingStatus status = booking.getStatus();
 
-        if (status == BookingStatus.CONFIRMED || status == BookingStatus.PENDING) {
+        if (status == BookingStatus.PENDING) {
+            // PENDING: Konfirmasi atau Batal
+            Button confirm = new Button("Konfirmasi");
+            confirm.getStyleClass().add("btn-primary-sm");
+            confirm.setOnAction(e -> handleConfirm(booking));
+
+            Button cancel = new Button("Batal");
+            cancel.getStyleClass().add("btn-danger-sm");
+            cancel.setOnAction(e -> handleCancel(booking));
+
+            box.getChildren().addAll(confirm, cancel);
+        } else if (status == BookingStatus.CONFIRMED) {
+            // CONFIRMED: Check In atau Batal
             Button checkIn = new Button("Check In");
             checkIn.getStyleClass().add("btn-success-sm");
             checkIn.setOnAction(e -> handleCheckIn(booking));
@@ -114,6 +130,7 @@ public class BookingsController {
 
             box.getChildren().addAll(checkIn, cancel);
         } else if (status == BookingStatus.CHECKED_IN) {
+            // CHECKED_IN: Check Out
             Button checkOut = new Button("Check Out");
             checkOut.getStyleClass().add("btn-warning-sm");
             checkOut.setOnAction(e -> handleCheckOut(booking));
@@ -146,6 +163,21 @@ public class BookingsController {
                 formatStatus(booking.getStatus()).equalsIgnoreCase(status);
             return matchSearch && matchStatus;
         });
+    }
+
+    private void handleConfirm(Booking booking) {
+        if (DialogUtil.konfirmasi("Konfirmasi Booking", 
+                "Apakah Anda yakin ingin mengkonfirmasi booking ini?\n\n" +
+                "Kode Booking: " + booking.getBookingCode())) {
+            try {
+                if (bookingService.confirmBooking(booking.getId())) {
+                    loadBookings();
+                    DialogUtil.sukses("Booking " + booking.getBookingCode() + " berhasil dikonfirmasi");
+                }
+            } catch (SQLException e) {
+                DialogUtil.error("Konfirmasi gagal: " + e.getMessage());
+            }
+        }
     }
 
     private void handleCheckIn(Booking booking) {

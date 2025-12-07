@@ -22,6 +22,7 @@ import java.util.Optional;
 public class GuestsController {
 
     @FXML private TableView<Guest> guestsTable;
+    @FXML private TableColumn<Guest, String> numberCol;
     @FXML private TableColumn<Guest, String> idNumberCol;
     @FXML private TableColumn<Guest, String> idTypeCol;
     @FXML private TableColumn<Guest, String> nameCol;
@@ -46,6 +47,9 @@ public class GuestsController {
     }
 
     private void setupTable() {
+        numberCol.setCellValueFactory(c -> new SimpleStringProperty(
+            String.valueOf(guestsTable.getItems().indexOf(c.getValue()) + 1)
+        ));
         idNumberCol.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getIdNumber()));
         idTypeCol.setCellValueFactory(c -> new SimpleStringProperty(formatIdType(c.getValue().getIdType())));
         nameCol.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getFullName()));

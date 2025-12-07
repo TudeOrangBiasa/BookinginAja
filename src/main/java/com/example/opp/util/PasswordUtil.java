@@ -19,14 +19,23 @@ public final class PasswordUtil {
     }
 
     public static boolean verify(String password, String storedHash) {
+        // Support plain text password (for migration/development)
+        if (!storedHash.contains(":")) {
+            return password.equals(storedHash);
+        }
+        
         String[] parts = storedHash.split(":");
         if (parts.length != 2) return false;
 
-        byte[] salt = Base64.getDecoder().decode(parts[0]);
-        byte[] expectedHash = Base64.getDecoder().decode(parts[1]);
-        byte[] actualHash = hashWithSalt(password, salt);
-
-        return MessageDigest.isEqual(expectedHash, actualHash);
+        try {
+            byte[] salt = Base64.getDecoder().decode(parts[0]);
+            byte[] expectedHash = Base64.getDecoder().decode(parts[1]);
+            byte[] actualHash = hashWithSalt(password, salt);
+            return MessageDigest.isEqual(expectedHash, actualHash);
+        } catch (IllegalArgumentException e) {
+            // Invalid base64, try plain text comparison
+            return password.equals(storedHash);
+        }
     }
 
     private static byte[] generateSalt() {

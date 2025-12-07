@@ -13,10 +13,8 @@
 
         <Region VBox.vgrow="ALWAYS"/>
 
-        <Label text="🏨" style="-fx-font-size: 64px;"/>
-        <Region prefHeight="16"/>
-        <Label text="Sistem" styleClass="brand-title"/>
-        <Label text="MANAJEMEN HOTEL" styleClass="brand-subtitle"/>
+        <Label text="HOTEL" styleClass="brand-title"/>
+        <Label text="MANAGEMENT SYSTEM" styleClass="brand-subtitle"/>
 
         <Region prefHeight="30"/>
 

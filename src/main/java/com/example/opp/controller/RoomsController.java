@@ -11,6 +11,8 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
 import java.sql.SQLException;
@@ -97,9 +99,33 @@ public class RoomsController {
     private VBox createRoomCard(Room room) {
         VBox card = new VBox(8);
         card.getStyleClass().addAll("room-card", getStatusClass(room.getStatus()));
-        card.setPadding(new Insets(16));
-        card.setPrefWidth(180);
+        card.setPadding(new Insets(0));
+        card.setPrefWidth(200);
         card.setAlignment(Pos.TOP_LEFT);
+
+        // Room image
+        ImageView imageView = new ImageView();
+        imageView.setFitWidth(200);
+        imageView.setFitHeight(120);
+        imageView.setPreserveRatio(false);
+        imageView.setStyle("-fx-background-radius: 12 12 0 0;");
+        
+        String imageUrl = room.getRoomType() != null ? room.getRoomType().getImageUrl() : null;
+        if (imageUrl != null && !imageUrl.isEmpty()) {
+            try {
+                Image img = new Image(imageUrl, 200, 120, false, true, true);
+                imageView.setImage(img);
+            } catch (Exception e) {
+                // Use placeholder if image fails
+                imageView.setStyle("-fx-background-color: #E0E0E0;");
+            }
+        } else {
+            imageView.setStyle("-fx-background-color: #E0E0E0;");
+        }
+
+        // Content area
+        VBox content = new VBox(6);
+        content.setPadding(new Insets(12));
 
         Label roomNum = new Label(room.getRoomNumber());
         roomNum.getStyleClass().add("room-number");
@@ -110,9 +136,6 @@ public class RoomsController {
 
         Label floorLabel = new Label("Lantai " + room.getFloor());
         floorLabel.getStyleClass().add("room-floor");
-
-        Region spacer = new Region();
-        spacer.setPrefHeight(8);
 
         HBox statusBox = new HBox(6);
         statusBox.setAlignment(Pos.CENTER_LEFT);
@@ -127,7 +150,8 @@ public class RoomsController {
         Label priceLabel = new Label(price + "/malam");
         priceLabel.getStyleClass().add("room-price");
 
-        card.getChildren().addAll(roomNum, typeLabel, floorLabel, spacer, statusBox, priceLabel);
+        content.getChildren().addAll(roomNum, typeLabel, floorLabel, statusBox, priceLabel);
+        card.getChildren().addAll(imageView, content);
         card.setOnMouseClicked(e -> showRoomDetails(room));
 
         return card;
@@ -287,6 +311,9 @@ public class RoomsController {
         TextField amenities = new TextField();
         amenities.setPromptText("AC, TV, WiFi, Mini Bar");
 
+        TextField imageUrl = new TextField();
+        imageUrl.setPromptText("https://example.com/image.jpg");
+
         grid.add(new Label("Nomor Kamar:"), 0, 0);
         grid.add(roomNumber, 1, 0);
         grid.add(new Label("Tipe Kamar:"), 0, 1);
@@ -297,6 +324,8 @@ public class RoomsController {
         grid.add(status, 1, 3);
         grid.add(new Label("Fasilitas:"), 0, 4);
         grid.add(amenities, 1, 4);
+        grid.add(new Label("URL Foto:"), 0, 5);
+        grid.add(imageUrl, 1, 5);
 
         dialog.getDialogPane().setContent(grid);
 

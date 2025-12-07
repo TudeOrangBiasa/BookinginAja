@@ -142,4 +142,18 @@ public class BookingRepository extends BaseRepository<Booking, Long> {
     public List<Booking> findAll() throws SQLException {
         return query("SELECT * FROM bookings ORDER BY created_at DESC");
     }
+
+    public int countNewWebBookingsSince(java.time.LocalDateTime since) throws SQLException {
+        return db.executeWithConnection(conn -> {
+            var stmt = conn.prepareStatement("SELECT COUNT(*) FROM bookings WHERE booking_source = 'WEB' AND created_at > ?");
+            stmt.setTimestamp(1, java.sql.Timestamp.valueOf(since));
+            var rs = stmt.executeQuery();
+            return rs.next() ? rs.getInt(1) : 0;
+        });
+    }
+
+    public List<Booking> findWebBookingsSince(java.time.LocalDateTime since) throws SQLException {
+        return query("SELECT * FROM bookings WHERE booking_source = 'WEB' AND created_at > ? ORDER BY created_at DESC", 
+                    java.sql.Timestamp.valueOf(since));
+    }
 }

@@ -22,6 +22,7 @@ import java.util.List;
 public class UsersController {
 
     @FXML private TableView<User> usersTable;
+    @FXML private TableColumn<User, String> numberCol;
     @FXML private TableColumn<User, String> usernameCol;
     @FXML private TableColumn<User, String> fullNameCol;
     @FXML private TableColumn<User, String> emailCol;
@@ -46,6 +47,9 @@ public class UsersController {
     }
 
     private void setupTable() {
+        numberCol.setCellValueFactory(c -> new SimpleStringProperty(
+            String.valueOf(usersTable.getItems().indexOf(c.getValue()) + 1)
+        ));
         usernameCol.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getUsername()));
         fullNameCol.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getFullName()));
         emailCol.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getEmail()));

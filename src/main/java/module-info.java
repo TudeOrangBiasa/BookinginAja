@@ -10,6 +10,8 @@ module com.example.opp {
     requires org.kordamp.ikonli.javafx;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires kernel;
+    requires layout;
 
     opens com.example.opp to javafx.fxml;
     opens com.example.opp.controller to javafx.fxml;

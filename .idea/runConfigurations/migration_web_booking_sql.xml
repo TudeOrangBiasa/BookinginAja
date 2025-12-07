@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="migration_web_booking.sql" type="DatabaseScript" editBeforeRun="true" singleton="false" nameIsGenerated="true">
+    <script-file value="$PROJECT_DIR$/src/main/resources/sql/migration_web_booking.sql" />
+    <script-mode>FILE</script-mode>
+    <data-source id="27fc393a-e8cc-43f6-a51a-9b7387e4d835" namespace="schema/&quot;hotel_management&quot;" />
+    <method v="2" />
+  </configuration>
+</component>

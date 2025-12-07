@@ -2,6 +2,7 @@ package com.example.opp.controller;
 
 import com.example.opp.model.Role;
 import com.example.opp.model.User;
+import com.example.opp.service.NotificationService;
 import com.example.opp.service.SessionManager;
 import com.example.opp.util.Constants;
 import com.example.opp.view.ViewManager;
@@ -28,15 +29,35 @@ public class MainController {
     @FXML private HBox navGuests;
     @FXML private HBox navReports;
     @FXML private HBox navUsers;
+    @FXML private Label bookingNotification;
 
     private HBox activeNav;
+    private final NotificationService notificationService = NotificationService.getInstance();
 
     @FXML
     public void initialize() {
         loadUserInfo();
         setupRoleBasedMenu();
+        setupNotifications();
         activeNav = navDashboard;
         showDashboard();
+    }
+
+    private void setupNotifications() {
+        // Bind notification badge to booking count
+        notificationService.newWebBookingsCountProperty().addListener((obs, oldVal, newVal) -> {
+            if (bookingNotification != null) {
+                if (newVal.intValue() > 0) {
+                    bookingNotification.setText(String.valueOf(newVal.intValue()));
+                    bookingNotification.setVisible(true);
+                } else {
+                    bookingNotification.setVisible(false);
+                }
+            }
+        });
+        
+        // Start polling for new bookings
+        notificationService.startPolling();
     }
 
     private void loadUserInfo() {
@@ -95,6 +116,8 @@ public class MainController {
     public void showBookings() {
         setActiveNav(navBookings);
         loadContent("/com/example/opp/fxml/bookings-view.fxml");
+        // Mark web booking notifications as read
+        notificationService.markBookingsAsRead();
     }
 
     @FXML

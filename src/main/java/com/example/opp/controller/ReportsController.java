@@ -5,6 +5,7 @@ import com.example.opp.model.BookingStatus;
 import com.example.opp.repository.BookingRepository;
 import com.example.opp.service.RoomService;
 import com.example.opp.util.DialogUtil;
+import com.example.opp.util.PdfExporter;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,6 +31,7 @@ public class ReportsController {
     @FXML private Label avgStay;
     @FXML private Label occupancyRate;
     @FXML private TableView<DailyReport> reportTable;
+    @FXML private TableColumn<DailyReport, String> numberCol;
     @FXML private TableColumn<DailyReport, String> dateCol;
     @FXML private TableColumn<DailyReport, String> bookingsCol;
     @FXML private TableColumn<DailyReport, String> checkInsCol;
@@ -50,6 +52,9 @@ public class ReportsController {
     }
 
     private void setupTable() {
+        numberCol.setCellValueFactory(c -> new SimpleStringProperty(
+            String.valueOf(reportTable.getItems().indexOf(c.getValue()) + 1)
+        ));
         dateCol.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().date()));
         bookingsCol.setCellValueFactory(c -> new SimpleStringProperty(String.valueOf(c.getValue().bookings())));
         checkInsCol.setCellValueFactory(c -> new SimpleStringProperty(String.valueOf(c.getValue().checkIns())));
@@ -220,16 +225,45 @@ public class ReportsController {
         }
 
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Simpan Laporan");
-        fileChooser.setInitialFileName("laporan_hotel_" + LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd")) + ".txt");
-        fileChooser.getExtensionFilters().addAll(
-            new FileChooser.ExtensionFilter("Text Files", "*.txt"),
-            new FileChooser.ExtensionFilter("CSV Files", "*.csv")
+        fileChooser.setTitle("Simpan Laporan PDF");
+        fileChooser.setInitialFileName("laporan_hotel_" + LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd")) + ".pdf");
+        fileChooser.getExtensionFilters().add(
+            new FileChooser.ExtensionFilter("PDF Files", "*.pdf")
         );
 
         File file = fileChooser.showSaveDialog(reportTable.getScene().getWindow());
         if (file != null) {
-            exportToFile(file);
+            exportToPdf(file);
+        }
+    }
+
+    private void exportToPdf(File file) {
+        try {
+            List<PdfExporter.ReportRow> data = reportTable.getItems().stream()
+                .map(r -> new PdfExporter.ReportRow(
+                    r.date(),
+                    r.bookings(),
+                    r.checkIns(),
+                    r.checkOuts(),
+                    r.revenue()
+                ))
+                .toList();
+
+            PdfExporter.exportReport(
+                file,
+                fromDate.getValue(),
+                toDate.getValue(),
+                totalBookings.getText(),
+                totalRevenue.getText(),
+                avgStay.getText(),
+                occupancyRate.getText(),
+                data
+            );
+
+            DialogUtil.sukses("Laporan berhasil diekspor ke PDF!\n\nFile: " + file.getName());
+        } catch (Exception e) {
+            DialogUtil.error("Gagal mengekspor PDF: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 

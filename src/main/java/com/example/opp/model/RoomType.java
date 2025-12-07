@@ -10,6 +10,7 @@ public class RoomType {
     private String description;
     private BigDecimal basePrice;
     private int capacity;
+    private String imageUrl;
     private LocalDateTime createdAt;
 
     public RoomType() {}
@@ -37,6 +38,9 @@ public class RoomType {
 
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+
+    public String getImageUrl() { return imageUrl; }
+    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
 
     public String getFormattedPrice() {
         return String.format("Rp %,.0f", basePrice);
